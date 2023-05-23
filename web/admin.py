@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import GenomeCharacteristics, LifestyleInformation
 
-# Register your models here.
+admin.site.register(GenomeCharacteristics)
+admin.site.register(LifestyleInformation)
