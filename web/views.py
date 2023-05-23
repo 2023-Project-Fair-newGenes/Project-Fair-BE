@@ -7,3 +7,13 @@ class Test(APIView):
         return Response({
             "Response" : "success"
         })
+
+class Result(APIView):
+    def get(self, request):
+
+        user_id = request.data.get('user_id')
+        print(user_id)
+
+        return Response({
+            "Response" : "success"
+        })
