@@ -1,5 +1,6 @@
 from .models import GenomeCharacteristics
 import pandas as pd
+import os
 
 def detection(snp_filepath):
 
@@ -15,6 +16,11 @@ def detection(snp_filepath):
         find_snp = user_snp.loc[user_snp['# rsid'] == rsid]
         if find_snp.empty != True:
             find_snp_list.append(find_snp['# rsid'].values[0])
+
+    if os.path.isfile(snp_filepath):
+        os.remove(snp_filepath)
+    else:
+        print("지우고자 하는 파일 없음")
 
     return find_snp_list
 
