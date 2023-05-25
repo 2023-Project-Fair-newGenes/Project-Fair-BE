@@ -10,20 +10,12 @@ def detection(snp_filepath):
     user_snp = pd.read_csv(snp_filepath)
 
     #사용자 genome SNP file에서 타게팅 비만 유전자 SNP rsid가 있는지 확인
-    find_snp_dict = {}
+    find_snp_list = []
     for rsid in id_list:
         find_snp = user_snp.loc[user_snp['# rsid'] == rsid]
         if find_snp.empty != True:
-            find_snp_dict[find_snp['# rsid'].values[0]] = find_snp['genotype'].values[0]
+            find_snp_list.append(find_snp['# rsid'].values[0])
 
-    # TODO : genotype 확인
-
-    # for rsid in find_snp_dict:
-    #     _snp = GenomeCharacteristics.objects.filter(snp_id = rsid, type='Unnormal')
-    #     print(_snp)
-
-    # TODO : 이 부분 수정(현재 하드코딩)
-    find_snp_list = ['rs9939609', 'rs17782313']
     return find_snp_list
 
 def getCharacteristic(find_snp_list):
