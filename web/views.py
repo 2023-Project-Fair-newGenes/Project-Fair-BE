@@ -23,6 +23,7 @@ class Result(APIView):
         current_directory = os.getcwd()
         csv_path = os.path.join(current_directory, directory_name)
         csv_path = os.path.join(csv_path, csv_filename)
+        print(csv_path)
 
         if os.path.isfile(csv_path):
             find_snp_list = detection(csv_path)
