@@ -47,7 +47,7 @@ class Upload(APIView):
         genome_file = request.FILES['genome_file'] #게놈 데이터 파일
 
         file_storage = FileSystemStorage()
-        filename = file_storage.save(user_id + ".csv", genome_file)
+        filename = file_storage.save("genome_file/" + user_id + ".csv", genome_file)
 
         if filename:
             return Response(status=status.HTTP_200_OK)
