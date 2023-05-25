@@ -1,6 +1,8 @@
 from django.http import HttpResponseNotFound
+from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from django.core.files.storage import FileSystemStorage
 
 import os
 
@@ -36,3 +38,16 @@ class Result(APIView):
             return HttpResponseNotFound(error_message)
 
         return Response(result)
+        
+class Upload(APIView):
+    def get(self, request):
+        user_id = request.data.get('user_id') #사용자 아이디 6자리
+        genome_file = request.FILES['genome_file'] #게놈 데이터 파일
+
+        file_storage = FileSystemStorage()
+        filename = file_storage.save(user_id + ".csv", genome_file)
+
+        if filename:
+            return Response(status=status.HTTP_200_OK)
+        else:
+            return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
