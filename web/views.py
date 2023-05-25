@@ -7,6 +7,8 @@ from django.core.files.storage import FileSystemStorage
 import os
 
 from web.detectionSNP import detection, getCharacteristic
+from web.models import LifestyleInformation
+
 
 class Test(APIView):
     def get(self, request):
@@ -51,3 +53,10 @@ class Upload(APIView):
             return Response(status=status.HTTP_200_OK)
         else:
             return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class RequestInfo(APIView):
+    def get(self, request):
+        rsid = request.data.get('id') #유전자 rsid
+        info = LifestyleInformation.objects.filter(snp_id = rsid)
+
+        return Response(info.values('info'))
