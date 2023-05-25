@@ -56,7 +56,19 @@ class Upload(APIView):
 
 class RequestInfo(APIView):
     def get(self, request):
-        rsid = request.data.get('id') #유전자 rsid
+        # rsid = request.data.get('id') #유전자 rsid
+        rsid = request.query_params.get('id') #유전자 rsid
         info = LifestyleInformation.objects.filter(snp_id = rsid)
 
-        return Response(info.values('info'))
+        lifestyle_info = []
+
+        for _info in info:
+            lifestyle_info.append(_info.info)
+
+        result = {}
+        result['id'] = rsid
+        result['lifestyle_info'] = lifestyle_info
+
+        print(result)
+
+        return Response(result)
