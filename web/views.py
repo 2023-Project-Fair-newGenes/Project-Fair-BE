@@ -15,7 +15,9 @@ class Test(APIView):
 class Result(APIView):
     def get(self, request):
 
-        user_id = request.data.get('user_id')
+        # user_id = request.data.get('user_id')
+        user_id = request.query_params.get('user_id')
+        print(user_id)
 
         csv_filename = user_id + ".csv"
         directory_name = 'genome_file'

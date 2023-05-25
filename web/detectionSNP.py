@@ -31,7 +31,7 @@ def getCharacteristic(find_snp_list):
     for _rsid in find_snp_list:
         dict = {}
         info = GenomeCharacteristics.objects.get(snp_id=_rsid)
-        dict['rsid'] = _rsid
+        dict['id'] = _rsid
         dict['characteristics'] = info.characteristics
         result.append(dict)
 
