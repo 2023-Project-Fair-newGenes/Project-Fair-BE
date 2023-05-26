@@ -44,8 +44,12 @@ class Result(APIView):
 class Upload(APIView):
     def post(self, request):
         user_id = request.data.get('user_id') #사용자 아이디 6자리
-        genome_file = request.FILES['genome_file'] #게놈 데이터 파일
-
+        print("user_id | " + user_id)
+        genome_file = request.FILES.get('genome_file') #게놈 데이터 파일
+        print("geome_file | " +genome_file)
+        print("request | " + request)
+        print("request.data | " +request.data)
+        print("request.FILES | " + request.FILES)
         file_storage = FileSystemStorage()
         filename = file_storage.save("genome_file/" + user_id + ".csv", genome_file)
 
