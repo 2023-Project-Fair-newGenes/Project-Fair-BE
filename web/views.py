@@ -42,7 +42,7 @@ class Result(APIView):
         return Response(result)
         
 class Upload(APIView):
-    def get(self, request):
+    def post(self, request):
         user_id = request.data.get('user_id') #사용자 아이디 6자리
         genome_file = request.FILES['genome_file'] #게놈 데이터 파일
 
